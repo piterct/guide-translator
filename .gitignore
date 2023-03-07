@@ -349,3 +349,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /Guide-Translator/Guide-Translator.Api/appsettings.json
+/Guide-Translator/Guide.Translate.Api/appsettings.json
