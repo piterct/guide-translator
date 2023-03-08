@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Guide.Translate.Business\Guide.Translate.Business.csproj" />
+  </ItemGroup>
+
 </Project>
