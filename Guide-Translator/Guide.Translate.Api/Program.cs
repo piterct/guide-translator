@@ -2,6 +2,7 @@ using Guide.Translate.AntiCorruption.Facade;
 using Guide.Translate.Business.Interfaces.External;
 using Guide.Translate.Business.Interfaces.Services;
 using Guide.Translate.Business.Services;
+using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddAutoMapper(typeof(Program));
 
 // Services
 builder.Services.AddScoped<ITranslateService, TranslateService>();
