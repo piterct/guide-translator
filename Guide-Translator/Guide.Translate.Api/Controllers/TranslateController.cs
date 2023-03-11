@@ -1,5 +1,7 @@
-﻿using Guide.Translate.Api.Model;
+﻿using AutoMapper;
+using Guide.Translate.Api.ViewModels;
 using Guide.Translate.Business.Interfaces.Services;
+using Guide.Translate.Business.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,23 +13,28 @@ namespace Guide.Translate.Api.Controllers
     {
         private readonly ILogger<TranslateController> _logger;
         private readonly ITranslateService _translateService;
+        private readonly IMapper _mapper;
 
-        public TranslateController(ILogger<TranslateController> logger, ITranslateService translateService)
+        public TranslateController(ILogger<TranslateController> logger, ITranslateService translateService, IMapper mapper)
         {
             _logger = logger;
             _translateService = translateService;
+            _mapper = mapper;
         }
 
         [HttpPost]
         [AllowAnonymous]
         [Route("")]
-        public async ValueTask<IActionResult> Post(TranslateModel translate)
+        public async Task<IActionResult> Post(TranslateViewModel model)
         {
             try
             {
-                //var likes = await _likeRepository.GetQuantityLikesByArticle(article_ID);
+                if (!ModelState.IsValid)
+                    return BadRequest(model);
 
-                return Ok("tudo certo!");
+                var translate = await _translateService.Translate(_mapper.Map<TranslateModel>(model));
+
+                return Ok(translate);
             }
             catch (Exception exception)
             {
