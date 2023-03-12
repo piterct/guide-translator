@@ -3,6 +3,7 @@ using Guide.Translate.AntiCorruption.Interfaces;
 using Guide.Translate.Business.DTO;
 using Guide.Translate.Business.Interfaces.Services;
 using Guide.Translate.Business.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace Guide.Translate.Business.Services
 {
@@ -17,11 +18,11 @@ namespace Guide.Translate.Business.Services
 
         public async Task<TranslatedDTO> Translate(TranslateModel translate)
         {
-            var chatGPTInput = new ChatGPTinputDTO($"Translate '{translate.Phrase}' Brazilian Portuguese");
+            var chatGPTInput = new ChatGPTinputDTO($"Translate '{translate.Phrase}' to Brazilian Portuguese");
 
-           var translated = await _gPTFacade.Translate(chatGPTInput);
+            var translated = await _gPTFacade.Translate(chatGPTInput);
 
-            return new TranslatedDTO { Translated = translated.Choices.Select(x=> x.Text).First() };
+            return new TranslatedDTO { Translated = translated.choices.Select(x=> x.text).FirstOrDefault() };
         }
     }
 }
