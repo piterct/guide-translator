@@ -4,7 +4,6 @@ using Guide.Translate.Business.DTO;
 using Guide.Translate.Business.Enum;
 using Guide.Translate.Business.Interfaces.Services;
 using Guide.Translate.Business.Models;
-using Microsoft.Extensions.Configuration;
 
 namespace Guide.Translate.Business.Services
 {
@@ -25,7 +24,7 @@ namespace Guide.Translate.Business.Services
 
             var translated = await _gPTFacade.Translate(chatGPTInput);
 
-            return new TranslatedDTO { Translated = translated.choices.Select(x => x.text).FirstOrDefault() };
+            return new TranslatedDTO { Translated =  await ReplaceResponse(translated.choices.Select(x => x.text).FirstOrDefault()) };
         }
 
         private async Task<string> LanguageChoice(TranslateModel translate)
@@ -41,6 +40,11 @@ namespace Guide.Translate.Business.Services
                 default:
                     return $"Translate '{translate.Phrase}' to English";
             }
+        }
+
+        private async Task<string> ReplaceResponse(string text)
+        {
+           return await Task.FromResult(text.Replace("\n", "").Replace("\t", ""));
         }
     }
 }
