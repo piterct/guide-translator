@@ -4,6 +4,7 @@
     {
         English = 0,
         Spanish = 1,
-        Portuguese = 2
+        BrazilianPortuguese = 2,
+        Portuguese = 3
     }
 }
