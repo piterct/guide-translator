@@ -1,6 +1,9 @@
-﻿namespace Guide.Translate.Api.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace Guide.Translate.Api.Controllers
 {
-    public class MainController
+    public abstract class MainController : Controller
     {
+
     }
 }
