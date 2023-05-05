@@ -2,5 +2,8 @@
 {
     public interface  INotifyer
     {
+        void Handle(Notify notificacao);
+        List<Notify> GetNotifications();
+        bool HasNotification();
     }
 }
