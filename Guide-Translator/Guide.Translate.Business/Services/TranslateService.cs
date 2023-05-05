@@ -4,14 +4,15 @@ using Guide.Translate.Business.DTO;
 using Guide.Translate.Business.Enum;
 using Guide.Translate.Business.Interfaces.Services;
 using Guide.Translate.Business.Models;
+using Guide.Translate.Business.Notifications;
 
 namespace Guide.Translate.Business.Services
 {
-    public class TranslateService : ITranslateService
+    public class TranslateService :  BaseService, ITranslateService
     {
         private readonly IGPTFacade _gPTFacade;
-
-        public TranslateService(IGPTFacade gPTFacade)
+    
+        public TranslateService(IGPTFacade gPTFacade, INotifyer notifyer) : base(notifyer)
         {
             _gPTFacade = gPTFacade;
         }
