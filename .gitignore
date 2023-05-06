@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /Guide-Translator/Guide-Translator.Api/appsettings.json
 /Guide-Translator/Guide.Translate.Api/appsettings.json
+/Guide-Translator/.idea/.idea.Guide-Translator/.idea
