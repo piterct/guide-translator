@@ -1,6 +1,7 @@
 using Guide.Translate.AntiCorruption.Facade;
 using Guide.Translate.AntiCorruption.Interfaces;
 using Guide.Translate.Business.Interfaces.Services;
+using Guide.Translate.Business.Notifications;
 using Guide.Translate.Business.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,7 @@ builder.Services.AddHttpClient();
 
 // Services
 builder.Services.AddScoped<ITranslateService, TranslateService>();
+builder.Services.AddScoped<INotifyer, Notifyer>();
 
 //Facades
 builder.Services.AddScoped<IGPTFacade, GPTFacade>();
