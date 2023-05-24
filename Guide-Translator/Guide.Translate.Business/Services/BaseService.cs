@@ -11,6 +11,11 @@ namespace Guide.Translate.Business.Services
             _notifyer = notifyer;
         }
 
+        protected bool InvalidOperation()
+        {
+            return !_notifyer.HasNotification();
+        }
+
         protected void Notify(string message)
         {
             _notifyer.Handle(new Notify(message));
