@@ -8,27 +8,27 @@ using Guide.Translate.Business.Notifications;
 
 namespace Guide.Translate.Business.Services
 {
-    public class TranslateService :  BaseService, ITranslateService
+    public class TranslateService : BaseService, ITranslateService
     {
-        private readonly IGPTFacade _gPTFacade;
-    
-        public TranslateService(IGPTFacade gPTFacade, INotifyer notifyer) : base(notifyer)
+        private readonly IGPTFacade _gptFacade;
+
+        public TranslateService(IGPTFacade gptFacade, INotifyer notifyer) : base(notifyer)
         {
-            _gPTFacade = gPTFacade;
+            _gptFacade = gptFacade;
         }
 
         public async Task<TranslatedDTO> Translate(TranslateModel translate)
         {
-            string phaseToTranslate = await LanguageChoice(translate);
+            string phaseToTranslate = LanguageChoice(translate);
 
-            var chatGPTInput = new ChatGPTinputDTO(phaseToTranslate);
+            var chatGptInput = new ChatGPTinputDTO(phaseToTranslate);
 
-            var translated = await _gPTFacade.Translate(chatGPTInput);
+            var translated = await _gptFacade.Translate(chatGptInput);
 
             return new TranslatedDTO { Translated = await ReplaceResponse(translated.choices.Select(x => x.text).FirstOrDefault() ?? string.Empty) };
         }
 
-        private async Task<string> LanguageChoice(TranslateModel translate)
+        private string LanguageChoice(TranslateModel translate)
         {
             switch (translate.PhaseTo)
             {
